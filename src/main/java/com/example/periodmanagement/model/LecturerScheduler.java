@@ -21,6 +21,6 @@ public class LecturerScheduler {
     Long subjectId;
 
     @ManyToOne
-    @JoinColumn(name = "period_id", nullable = false)
+    @JoinColumn(nullable = false)
     Period period;
 }

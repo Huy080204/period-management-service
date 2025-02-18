@@ -5,6 +5,7 @@ public enum ErrorCode {
     UNAUTHENTICATED("ERROR", "Unauthenticated"),
     PERIOD_EXITED("ERROR", "Period already exists"),
     PERIOD_NOT_FOUND("NOT_FOUND", "Period not found"),
+    LECTURER_SCHEDULER_NOT_FOUND("NOT_FOUND", "Lecturer scheduler not found"),
     ;
 
     private String code;
