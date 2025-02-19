@@ -23,7 +23,7 @@ import java.util.List;
 public class PeriodCriteria {
     Long id;
     String name;
-    LocalDate description;
+    String description;
 
     public Specification<Period> getCriteria() {
         return new Specification<Period>() {
@@ -37,7 +37,7 @@ public class PeriodCriteria {
                     predicates.add(cb.like(root.get("name"), "%" + getName() + "%"));
                 }
                 if (getDescription() != null) {
-                    predicates.add(cb.equal(root.get("description"), getDescription()));
+                    predicates.add(cb.like(root.get("description"), "%" + getDescription() + "%"));
                 }
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));
             }

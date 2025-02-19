@@ -55,7 +55,7 @@ public class PeriodController {
     }
 
     // get paging and filtering
-    @PostMapping(path = "/list")
+    @GetMapping(path = "/list")
     public ApiMessageDto<PageResponseDto<PeriodDto>> list(
             @ModelAttribute PeriodCriteria periodCriteria,
             Pageable pageable
