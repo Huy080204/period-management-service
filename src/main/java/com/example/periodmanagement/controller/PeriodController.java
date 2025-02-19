@@ -41,8 +41,21 @@ public class PeriodController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    // get by id
+    @GetMapping(path = "/get/{id}")
+    public ApiMessageDto<PeriodDto> getById(@PathVariable Long id) {
+        PeriodDto pageResponse = periodService.getPeriod(id);
+
+        return ApiMessageDto.<PeriodDto>builder()
+                .result(true)
+                .code(String.valueOf(HttpStatus.OK.value()))
+                .message("Get period successfully")
+                .data(pageResponse)
+                .build();
+    }
+
     // get paging and filtering
-    @GetMapping(path = "/list")
+    @PostMapping(path = "/list")
     public ApiMessageDto<PageResponseDto<PeriodDto>> list(
             @ModelAttribute PeriodCriteria periodCriteria,
             Pageable pageable

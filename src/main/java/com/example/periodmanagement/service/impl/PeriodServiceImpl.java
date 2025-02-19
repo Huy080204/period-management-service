@@ -41,6 +41,13 @@ public class PeriodServiceImpl implements PeriodService {
     }
 
     @Override
+    public PeriodDto getPeriod(Long id) {
+        Period period = periodRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.PERIOD_NOT_FOUND));
+        return periodMapper.toDto(period);
+    }
+
+    @Override
     public PageResponseDto<PeriodDto> getPagePeriods(PeriodCriteria periodCriteria, Pageable pageable) {
         Page<Period> pageData = periodRepository.findAll(periodCriteria.getCriteria(), pageable);
 

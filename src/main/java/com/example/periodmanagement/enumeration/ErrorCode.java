@@ -6,6 +6,7 @@ public enum ErrorCode {
     PERIOD_EXITED("ERROR", "Period already exists"),
     PERIOD_NOT_FOUND("NOT_FOUND", "Period not found"),
     LECTURER_SCHEDULER_NOT_FOUND("NOT_FOUND", "Lecturer scheduler not found"),
+    LECTURER_SCHEDULER_EXITED("ERROR", "Lecturer scheduler already exists"),
     ;
 
     private String code;

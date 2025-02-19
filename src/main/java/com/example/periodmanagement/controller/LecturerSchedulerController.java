@@ -3,8 +3,8 @@ package com.example.periodmanagement.controller;
 import com.example.periodmanagement.dto.ApiMessageDto;
 import com.example.periodmanagement.dto.PageResponseDto;
 import com.example.periodmanagement.dto.lecturerScheduler.LecturerSchedulerDto;
-import com.example.periodmanagement.form.LecturerSchduler.CreateLecturerSchedulerForm;
-import com.example.periodmanagement.form.LecturerSchduler.UpdateLecturerSchedulerForm;
+import com.example.periodmanagement.form.lecturerSchduler.CreateLecturerSchedulerForm;
+import com.example.periodmanagement.form.lecturerSchduler.UpdateLecturerSchedulerForm;
 import com.example.periodmanagement.model.criteria.LecturerSchedulerCriteria;
 import com.example.periodmanagement.service.LecturerSchedulerService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,6 +39,19 @@ public class LecturerSchedulerController {
                 .build();
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    // get paging and filtering
+    @GetMapping(path = "/get/{id}")
+    public ApiMessageDto<LecturerSchedulerDto> getById(@PathVariable("id") Long id) {
+        LecturerSchedulerDto lecturerSchedulerDto = lecturerSchedulerService.getLecturerScheduler(id);
+
+        return ApiMessageDto.<LecturerSchedulerDto>builder()
+                .result(true)
+                .code(String.valueOf(HttpStatus.OK.value()))
+                .message("Get lecturer scheduler successfully")
+                .data(lecturerSchedulerDto)
+                .build();
     }
 
     // get paging and filtering

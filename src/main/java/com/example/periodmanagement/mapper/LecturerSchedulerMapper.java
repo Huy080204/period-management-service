@@ -1,8 +1,8 @@
 package com.example.periodmanagement.mapper;
 
 import com.example.periodmanagement.dto.lecturerScheduler.LecturerSchedulerDto;
-import com.example.periodmanagement.form.LecturerSchduler.CreateLecturerSchedulerForm;
-import com.example.periodmanagement.form.LecturerSchduler.UpdateLecturerSchedulerForm;
+import com.example.periodmanagement.form.lecturerSchduler.CreateLecturerSchedulerForm;
+import com.example.periodmanagement.form.lecturerSchduler.UpdateLecturerSchedulerForm;
 import com.example.periodmanagement.model.LecturerScheduler;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

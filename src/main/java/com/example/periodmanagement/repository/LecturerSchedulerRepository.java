@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LecturerSchedulerRepository extends JpaRepository<LecturerScheduler, Long>, JpaSpecificationExecutor<LecturerScheduler> {
-
+    boolean existsByLecturerIdAndSubjectIdAndPeriodId(Long lecturerId, Long subjectId, Long periodId);
 }
