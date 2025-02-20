@@ -9,8 +9,13 @@ import org.springframework.data.domain.Pageable;
 
 public interface PeriodService {
     PeriodDto createPeriod(CreatePeriodForm form);
+
+    PeriodDto getPeriod(Long id);
+
     PageResponseDto<PeriodDto> getPagePeriods(PeriodCriteria periodCriteria, Pageable pageable);
+
     PeriodDto updatePeriod(UpdatePeriodForm form);
+
     void deletePeriod(Long id);
 
 }

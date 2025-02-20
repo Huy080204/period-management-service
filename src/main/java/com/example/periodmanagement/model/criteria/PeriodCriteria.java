@@ -5,7 +5,11 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.time.LocalDate;
@@ -13,12 +17,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@AllArgsConstructor
 public class PeriodCriteria {
     Long id;
     String name;
-    LocalDate description;
+    String description;
 
-    public Specification<com.example.periodmanagement.model.Period> getCriteria() {
+    public Specification<Period> getCriteria() {
         return new Specification<Period>() {
             @Override
             public Predicate toPredicate(Root<Period> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -27,10 +34,10 @@ public class PeriodCriteria {
                     predicates.add(cb.equal(root.get("id"), getId()));
                 }
                 if (getName() != null && !getName().trim().isEmpty()) {
-                    predicates.add(cb.like(root.get("fullName"), "%" + getName() + "%"));
+                    predicates.add(cb.like(root.get("name"), "%" + getName() + "%"));
                 }
                 if (getDescription() != null) {
-                    predicates.add(cb.equal(root.get("birthDate"), getDescription()));
+                    predicates.add(cb.like(root.get("description"), "%" + getDescription() + "%"));
                 }
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));
             }

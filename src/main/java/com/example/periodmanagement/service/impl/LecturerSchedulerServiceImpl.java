@@ -2,11 +2,10 @@ package com.example.periodmanagement.service.impl;
 
 import com.example.periodmanagement.dto.PageResponseDto;
 import com.example.periodmanagement.dto.lecturerScheduler.LecturerSchedulerDto;
-import com.example.periodmanagement.dto.period.PeriodDto;
 import com.example.periodmanagement.enumeration.ErrorCode;
 import com.example.periodmanagement.exception.AppException;
-import com.example.periodmanagement.form.LecturerSchduler.CreateLecturerSchedulerForm;
-import com.example.periodmanagement.form.LecturerSchduler.UpdateLecturerSchedulerForm;
+import com.example.periodmanagement.form.lecturerSchduler.CreateLecturerSchedulerForm;
+import com.example.periodmanagement.form.lecturerSchduler.UpdateLecturerSchedulerForm;
 import com.example.periodmanagement.mapper.LecturerSchedulerMapper;
 import com.example.periodmanagement.model.LecturerScheduler;
 import com.example.periodmanagement.model.Period;
@@ -35,11 +34,21 @@ public class LecturerSchedulerServiceImpl implements LecturerSchedulerService {
 
     @Override
     public LecturerSchedulerDto createLecturerScheduler(CreateLecturerSchedulerForm form) {
+        if (lecturerSchedulerRepository.existsByLecturerIdAndSubjectIdAndPeriodId(form.getLecturerId(), form.getSubjectId(), form.getPeriodId())) {
+            throw new AppException(ErrorCode.LECTURER_SCHEDULER_EXITED);
+        }
         Period period = periodRepository.findById(form.getPeriodId())
                 .orElseThrow(() -> new RuntimeException("Period not found"));
         LecturerScheduler lecturerScheduler = lecturerSchedulerMapper.toEntity(form);
         lecturerScheduler.setPeriod(period);
         lecturerScheduler = lecturerSchedulerRepository.save(lecturerScheduler);
+        return lecturerSchedulerMapper.toDto(lecturerScheduler);
+    }
+
+    @Override
+    public LecturerSchedulerDto getLecturerScheduler(Long id) {
+        LecturerScheduler lecturerScheduler = lecturerSchedulerRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.LECTURER_SCHEDULER_NOT_FOUND));
         return lecturerSchedulerMapper.toDto(lecturerScheduler);
     }
 
