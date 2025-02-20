@@ -70,7 +70,7 @@ public class LecturerSchedulerController {
                 .build();
     }
 
-    // create
+    // update
     @PutMapping(path = "/update")
     public ResponseEntity<ApiMessageDto<LecturerSchedulerDto>> update(@RequestBody @Valid UpdateLecturerSchedulerForm form) {
         LecturerSchedulerDto lecturerSchedulerDto = lecturerSchedulerService.updateLecturerScheduler(form);
@@ -87,7 +87,7 @@ public class LecturerSchedulerController {
 
     // delete
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<ApiMessageDto<Void>> update(@PathVariable Long id) {
+    public ResponseEntity<ApiMessageDto<Void>> delete(@PathVariable Long id) {
         lecturerSchedulerService.deleteLecturerScheduler(id);
 
         ApiMessageDto<Void> response = ApiMessageDto.<Void>builder()
