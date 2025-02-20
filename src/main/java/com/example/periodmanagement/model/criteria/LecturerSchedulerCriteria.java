@@ -3,13 +3,20 @@ package com.example.periodmanagement.model.criteria;
 import com.example.periodmanagement.model.LecturerScheduler;
 import com.example.periodmanagement.model.Period;
 import jakarta.persistence.criteria.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@AllArgsConstructor
 public class LecturerSchedulerCriteria {
     Long lecturerSchedulerId;
     Long lecturerId;
