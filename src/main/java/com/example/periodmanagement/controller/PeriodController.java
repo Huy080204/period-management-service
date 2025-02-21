@@ -15,6 +15,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -28,6 +29,7 @@ public class PeriodController {
 
     // create
     @PostMapping(path = "/create")
+    @PreAuthorize("hasAuthority('PER_CRE')")
     public ResponseEntity<ApiMessageDto<PeriodDto>> create(@RequestBody @Valid CreatePeriodForm form) {
         PeriodDto periodDto = periodService.createPeriod(form);
 
@@ -43,6 +45,7 @@ public class PeriodController {
 
     // get by id
     @GetMapping(path = "/get/{id}")
+    @PreAuthorize("hasAuthority('PER_GET')")
     public ApiMessageDto<PeriodDto> getById(@PathVariable Long id) {
         PeriodDto pageResponse = periodService.getPeriod(id);
 
@@ -56,6 +59,7 @@ public class PeriodController {
 
     // get paging and filtering
     @GetMapping(path = "/list")
+    @PreAuthorize("hasAuthority('PER_GET')")
     public ApiMessageDto<PageResponseDto<PeriodDto>> list(
             @ModelAttribute PeriodCriteria periodCriteria,
             Pageable pageable
@@ -72,6 +76,7 @@ public class PeriodController {
 
     // update
     @PutMapping(path = "/update")
+    @PreAuthorize("hasAuthority('PER_UPD')")
     public ResponseEntity<ApiMessageDto<PeriodDto>> update(@RequestBody @Valid UpdatePeriodForm form) {
         PeriodDto periodDto = periodService.updatePeriod(form);
 
@@ -87,6 +92,7 @@ public class PeriodController {
 
     // delete
     @DeleteMapping(path = "/delete/{id}")
+    @PreAuthorize("hasAuthority('PER_DEL')")
     public ResponseEntity<ApiMessageDto<Void>> delete(@PathVariable Long id) {
         periodService.deletePeriod(id);
 
