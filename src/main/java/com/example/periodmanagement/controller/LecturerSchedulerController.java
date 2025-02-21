@@ -15,6 +15,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -28,6 +29,7 @@ public class LecturerSchedulerController {
 
     // create
     @PostMapping(path = "/create")
+    @PreAuthorize("hasAuthority('LEC_SDL_CRE')")
     public ResponseEntity<ApiMessageDto<LecturerSchedulerDto>> create(@RequestBody @Valid CreateLecturerSchedulerForm form) {
         LecturerSchedulerDto lecturerSchedulerDto = lecturerSchedulerService.createLecturerScheduler(form);
 
@@ -43,6 +45,7 @@ public class LecturerSchedulerController {
 
     // get paging and filtering
     @GetMapping(path = "/get/{id}")
+    @PreAuthorize("hasAuthority('LEC_SDL_GET')")
     public ApiMessageDto<LecturerSchedulerDto> getById(@PathVariable("id") Long id) {
         LecturerSchedulerDto lecturerSchedulerDto = lecturerSchedulerService.getLecturerScheduler(id);
 
@@ -56,6 +59,7 @@ public class LecturerSchedulerController {
 
     // get paging and filtering
     @GetMapping(path = "/list")
+    @PreAuthorize("hasAuthority('LEC_SDL_GET')")
     public ApiMessageDto<PageResponseDto<LecturerSchedulerDto>> list(
             @ModelAttribute LecturerSchedulerCriteria lecturerSchedulerCriteria,
             Pageable pageable
@@ -72,6 +76,7 @@ public class LecturerSchedulerController {
 
     // update
     @PutMapping(path = "/update")
+    @PreAuthorize("hasAuthority('LEC_SDL_UPD')")
     public ResponseEntity<ApiMessageDto<LecturerSchedulerDto>> update(@RequestBody @Valid UpdateLecturerSchedulerForm form) {
         LecturerSchedulerDto lecturerSchedulerDto = lecturerSchedulerService.updateLecturerScheduler(form);
 
@@ -87,6 +92,7 @@ public class LecturerSchedulerController {
 
     // delete
     @DeleteMapping(path = "/delete/{id}")
+    @PreAuthorize("hasAuthority('LEC_SDL_DEL')")
     public ResponseEntity<ApiMessageDto<Void>> delete(@PathVariable Long id) {
         lecturerSchedulerService.deleteLecturerScheduler(id);
 
